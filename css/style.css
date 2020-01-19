@@ -17,7 +17,7 @@ body {
   font-size: 18px;
   line-height: 1.8;
   color: #fff;
-background-color: #222;}
+  background-color: #222;}
   @media screen and (max-width: 992px) {
     body {
       font-size: 16px; } }
@@ -233,10 +233,10 @@ figure {
 
 #colorlib-hero {
   min-height: 500px;
-  background: #fff url(../images/loader.gif) no-repeat center center;
+  background: #222 url(../images/loader.gif) no-repeat center center;
   width: 100%;
   float: left;
-  margin-bottom: 10em;
+  margin-bottom: 5em;
   clear: both; }
   #colorlib-hero .flexslider {
     border: none;
@@ -250,7 +250,8 @@ figure {
         background-size: cover;
         background-position: bottom center;
         min-height: 400px;
-        position: relative; }
+        position: relative;
+        background-color: #222; }
     #colorlib-hero .flexslider .flex-control-nav {
       bottom: 20px;
       z-index: 1000;
@@ -384,7 +385,7 @@ body.offcanvas {
 .colorlib-services,
 .colorlib-contact {
   padding-top: 4em;
-  padding-bottom: 9em;
+  padding-bottom: 4em;
   clear: both;
   width: 100%;
   display: block; }
