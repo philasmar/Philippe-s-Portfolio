@@ -225,11 +225,13 @@ figure {
   float: right;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
-  transition: 0.5s; }
+  transition: 0.5s;
+padding-bottom: 5em;}
   @media screen and (max-width: 768px) {
     #colorlib-main {
       width: 100%;
-      padding: 0 1em; } }
+      padding: 0 1em;
+      padding-bottom: 5em; } }
 
 #colorlib-hero {
   min-height: 500px;
