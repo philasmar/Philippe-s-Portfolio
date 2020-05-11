@@ -107,7 +107,7 @@ body{
   background-position: 14px 12px;
   background-repeat: no-repeat;
   font-size: 16px;
-  padding: 14px 20px 12px 45px;
+  padding: 14px 15px 12px 15px;
   border: none;
   border-bottom: 1px solid #ddd;
 }
@@ -154,4 +154,36 @@ body{
     display: flex;
     justify-content: center;
     padding: 10px;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+
+.kpi{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin: 15px;
+    margin-bottom: 0px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+
+.kpiTitle{
+    color: #595959;
+    font-size: 33px;
+}
+
+.kpiValue{
+  color: #4477AA;
+  font-size: 56px;
+}
+
+#barchart{
+    background-color: white;
+    margin: 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
 }

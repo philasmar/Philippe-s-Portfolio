@@ -88,6 +88,7 @@ function updateSelectionsBar(){
 function countryFunction() {
   if($("#countriesDropdown").css("display") == "none"){
     $("#countriesDropdown").css("display", "flex");
+    $("#countriesDropdown input").focus();
   }else{
     $("#countriesDropdown").css("display", "none");
   }
@@ -96,6 +97,7 @@ function countryFunction() {
 function stateFunction() {
   if($("#statesDropdown").css("display") == "none"){
     $("#statesDropdown").css("display", "flex");
+    $("#statesDropdown input").focus();
   }else{
     $("#statesDropdown").css("display", "none");
   }
@@ -104,6 +106,7 @@ function stateFunction() {
 function cityFunction() {
   if($("#citiesDropdown").css("display") == "none"){
     $("#citiesDropdown").css("display", "flex");
+    $("#citiesDropdown input").focus();
   }else{
     $("#citiesDropdown").css("display", "none");
   }
@@ -150,13 +153,15 @@ function loadBarChart(url){
       var data = jsonfile.map(function(e) {
          return e.Cases;
       });;
+
+      $("#kpi .kpiValue").text(numberWithCommas(data.reduce((a, b) => a + b)));
       var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
               labels: labels,
               datasets: [{
-                  label: '# of Votes',
+                  label: 'Cases',
                   data: data,
                   backgroundColor: 'rgba(54, 162, 235, 0.2)',
                   borderColor: 'rgba(54, 162, 235, 1)',
@@ -166,6 +171,9 @@ function loadBarChart(url){
           options: {
               responsive: true,
               maintainAspectRatio: false,
+               legend: {
+                  display: false
+               },
               scales: {
                   yAxes: [{
                       ticks: {
@@ -181,3 +189,7 @@ function loadBarChart(url){
 }
 
 loadBarChart("http://52.14.161.75/");
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
