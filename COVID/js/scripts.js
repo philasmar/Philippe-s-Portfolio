@@ -35,7 +35,48 @@ $(document).ready(function() {
 
     }
   );
+
+  filtered = false;
+  if (getCookie("country") != null){
+    selections["country"] = getCookie("country");
+    filtered = true;
+  }
+  if (getCookie("state") != null){
+    selections["state"] = getCookie("state");
+    filtered = true;
+  }
+  if (getCookie("city") != null){
+    selections["city"] = getCookie("city");
+    filtered = true;
+  }
+  if (filtered == true){
+    $("#bookmarkOff").hide();
+    $("#bookmarkOn").show();
+  }
+  updateSelectionsBar();
+  updateQuery();
 });
+
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+}
 
 function filterBox(field, value){
   return "<div filter='" + field + "' class='filterBox'><div class='filterValues'><a class='filterBoxField'>" + fieldLabel[field] + "</a><a class='filterBoxValue'>" + value + "</a></div><div class='filterRemove' onclick='removeFilter(event)'></div></div>"
@@ -188,8 +229,37 @@ function loadBarChart(url){
   );
 }
 
-loadBarChart("http://52.14.161.75/");
+// loadBarChart("http://52.14.161.75/");
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function setBookmark(){
+  var filtered = false;
+  if(selections["country"] != null){
+    document.cookie = "country=" + selections["country"];
+    filtered = true;
+  }
+  if(selections["state"] != null){
+    document.cookie = "state=" + selections["state"];
+    filtered = true;
+  }
+  if(selections["city"] != null){
+    document.cookie = "city=" + selections["city"];
+    filtered = true;
+  }
+  if (filtered == true){
+    $("#bookmarkOff").hide();
+    $("#bookmarkOn").show();
+  }
+}
+
+function deleteBookmark(){
+  document.cookie = "country= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie = "state= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie = "city= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+
+  $("#bookmarkOn").hide();
+  $("#bookmarkOff").show();
 }
