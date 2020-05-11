@@ -1,7 +1,45 @@
-<html>
-  <head>
-    <meta http-equiv="Refresh" content="0; url=https://philasmar.us.qlikcloud.com/single/?appid=984c5574-f32e-48fc-877a-4edeaf94758d&sheet=1afd6931-60da-4108-b21d-39dcedd6279a&bookmark=a7f33099-e314-47f6-ac47-87a8a49d5404&opt=ctxmenu,currsel&select=$::State,NY" style="border:none;width:100%;height:100%;" />
-  </head>
-  <body>
-  </body>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>COVID-19</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="selections">
+  </div>
+  <div id="title">
+    <span>COVID-19 Dashboard</span>
+  </div>
+  <div id="filters">
+    <div class="dropdown">
+      <div onclick="countryFunction()" class="dropbtn"><span>Country</span><div class="filterhighlight"></div></div>
+      <div id="countriesDropdown" class="dropdown-content">
+        <input type="text" placeholder="Search.." class="searchInput" id="countriesInput" onkeyup="filterFunction('country')">
+      </div>
+    </div>
+    <div class="dropdown">
+      <div onclick="stateFunction()" class="dropbtn"><span>State</span><div class="filterhighlight"></div></div>
+      <div id="statesDropdown" class="dropdown-content">
+        <input type="text" placeholder="Search.." class="searchInput" id="statesInput" onkeyup="filterFunction('state')">
+      </div>
+    </div>
+    <div class="dropdown">
+      <div onclick="cityFunction()" class="dropbtn"><span>City</span><div class="filterhighlight"></div></div>
+      <div id="citiesDropdown" class="dropdown-content">
+        <input type="text" placeholder="Search.." class="searchInput" id="citiesInput" onkeyup="filterFunction('city')">
+      </div>
+    </div>
+  </div>
+  <div id="barchart" class="chart">
+    <div class="chart-container" style="position: relative; height:80vh; width:95%">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+
 </html>
