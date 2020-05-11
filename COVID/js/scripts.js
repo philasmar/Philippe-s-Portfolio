@@ -1,6 +1,25 @@
 var selections = {};
 var filters = {};
 var fieldLabel = {'country':'Country','state':'State','city':'City'};
+filtered = false;
+if (getCookie("country") != null){
+  selections["country"] = getCookie("country");
+  filtered = true;
+}
+if (getCookie("state") != null){
+  selections["state"] = getCookie("state");
+  filtered = true;
+}
+if (getCookie("city") != null){
+  selections["city"] = getCookie("city");
+  filtered = true;
+}
+if (filtered == true){
+  $("#bookmarkOff").hide();
+  $("#bookmarkOn").show();
+}
+updateSelectionsBar();
+updateQuery();
 $(document).ready(function() {
   $.get(
     "http://52.14.161.75/countries",
@@ -35,26 +54,6 @@ $(document).ready(function() {
 
     }
   );
-
-  filtered = false;
-  if (getCookie("country") != null){
-    selections["country"] = getCookie("country");
-    filtered = true;
-  }
-  if (getCookie("state") != null){
-    selections["state"] = getCookie("state");
-    filtered = true;
-  }
-  if (getCookie("city") != null){
-    selections["city"] = getCookie("city");
-    filtered = true;
-  }
-  if (filtered == true){
-    $("#bookmarkOff").hide();
-    $("#bookmarkOn").show();
-  }
-  updateSelectionsBar();
-  updateQuery();
 });
 
 function getCookie(name) {
@@ -210,6 +209,9 @@ function loadBarChart(url){
               }]
           },
           options: {
+              animation: {
+                  duration: 0 // general animation time
+              },
               responsive: true,
               maintainAspectRatio: false,
                legend: {
