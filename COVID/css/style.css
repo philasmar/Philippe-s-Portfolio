@@ -67,6 +67,19 @@ body{
     font-size: 20px;
 }
 
+#selectionactions{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+#selectionactions:hover{
+  background-color: #D6D6D6;
+  cursor: pointer;
+}
+
 #bookmarkOff{
   cursor: pointer;
 }

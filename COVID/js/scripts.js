@@ -20,40 +20,12 @@ if (filtered == true){
 }
 updateSelectionsBar();
 updateQuery();
+
 $(document).ready(function() {
-  $.get(
-    "http://52.14.161.75/countries",
-    function(data) {
-      // var data = JSON.parse(data)
-       // alert('page content: ' + data.length);
-       $(data).each( function( index, el ) {
-            $("#countriesDropdown").append("<a onclick='dropdownClick(event, \"country\")'>" + el + "</a>")
-        });
-
-    }
-  );
-  $.get(
-    "http://52.14.161.75/states",
-    function(data) {
-      // var data = JSON.parse(data)
-       // alert('page content: ' + data.length);
-       $(data).each( function( index, el ) {
-            $("#statesDropdown").append("<a  onclick='dropdownClick(event, \"state\")'>" + el + "</a>")
-        });
-
-    }
-  );
-  $.get(
-    "http://52.14.161.75/cities",
-    function(data) {
-      // var data = JSON.parse(data)
-       // alert('page content: ' + data.length);
-       $(data).each( function( index, el ) {
-            $("#citiesDropdown").append("<a onclick='dropdownClick(event, \"city\")'>" + el + "</a>")
-        });
-
-    }
-  );
+  updateSelectionsQuery();
+  $("#clearselections").click(clearSelections);
+  $("#bookmarkOff").click(setBookmark);
+  $("#bookmarkOn").click(deleteBookmark);
 });
 
 function getCookie(name) {
@@ -87,6 +59,20 @@ function removeFilter(e){
   $(filters[$(e.target).parent().attr("filter")]).css("background-color", "white");
   updateSelectionsBar();
   updateQuery();
+  updateSelectionsQuery();
+}
+
+function clearSelections(){
+  selections = {};
+  for(var key in filters) {
+    var value = filters[key];
+    $(value).css("background-color", "white");
+  }
+  filters = {};
+
+  updateSelectionsBar();
+  updateQuery();
+  updateSelectionsQuery();
 }
 
 function dropdownClick(e, filter){
@@ -97,6 +83,46 @@ function dropdownClick(e, filter){
   $(e.target).parent().hide();
   updateSelectionsBar();
   updateQuery();
+  updateSelectionsQuery();
+}
+
+function updateSelectionsQuery(){
+  $("#countriesDropdown > a").remove();
+  $.get(
+    addSelections("http://52.14.161.75/countries"),
+    function(data) {
+      // var data = JSON.parse(data)
+       // alert('page content: ' + data.length);
+       $(data).each( function( index, el ) {
+            $("#countriesDropdown").append("<a onclick='dropdownClick(event, \"country\")'>" + el + "</a>")
+        });
+
+    }
+  );
+  $("#statesDropdown > a").remove();
+  $.get(
+    addSelections("http://52.14.161.75/states"),
+    function(data) {
+      // var data = JSON.parse(data)
+       // alert('page content: ' + data.length);
+       $(data).each( function( index, el ) {
+            $("#statesDropdown").append("<a  onclick='dropdownClick(event, \"state\")'>" + el + "</a>")
+        });
+
+    }
+  );
+  $("#citiesDropdown > a").remove();
+  $.get(
+    addSelections("http://52.14.161.75/cities"),
+    function(data) {
+      // var data = JSON.parse(data)
+       // alert('page content: ' + data.length);
+       $(data).each( function( index, el ) {
+            $("#citiesDropdown").append("<a onclick='dropdownClick(event, \"city\")'>" + el + "</a>")
+        });
+
+    }
+  );
 }
 
 function updateQuery(){
@@ -115,6 +141,23 @@ function updateQuery(){
     query += key + "=" + value
   }
   loadBarChart(query);
+}
+
+function addSelections(query){
+  var first = true;
+
+  for(var key in selections) {
+    var value = selections[key];
+    if (first == true){
+      query += "?";
+      first = false;
+    }
+    else{
+        query += "&";
+    }
+    query += key + "=" + value
+  }
+  return query
 }
 
 function updateSelectionsBar(){
